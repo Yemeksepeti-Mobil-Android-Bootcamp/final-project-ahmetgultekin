@@ -5,16 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.databinding.FragmentOnBoardingBinding
-import com.example.foodorderingapp.ui.utils.SharedPreferencesUtil
+import com.example.foodorderingapp.data.local.SharedPreferencesManager
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class OnBoarding : Fragment() {
     private lateinit var binding : FragmentOnBoardingBinding
     private val listOfFragments = ArrayList<Fragment>()
+    private val viewModel : OnBoardingViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -48,7 +51,7 @@ class OnBoarding : Fragment() {
                     binding.nextButton.text = resources.getText(R.string.finish)
                     binding.nextButton.setOnClickListener {
                         findNavController().navigate(R.id.action_onBoarding_to_homeFragment)
-                        SharedPreferencesUtil.saveFirstLaunch(false)
+                        viewModel.saveSituation(false)
                     }
                 } else {
                     binding.prevButton.visibility = View.VISIBLE

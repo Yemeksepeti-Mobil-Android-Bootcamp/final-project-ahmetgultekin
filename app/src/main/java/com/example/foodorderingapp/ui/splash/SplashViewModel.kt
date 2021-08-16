@@ -1,6 +1,18 @@
 package com.example.foodorderingapp.ui.splash
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.foodorderingapp.data.ApiRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SplashViewModel : ViewModel() {
+@HiltViewModel
+class SplashViewModel @Inject constructor(val apiRepository: ApiRepository) : ViewModel() {
+
+    private val firstLaunch = MutableLiveData<Boolean>()
+    fun isFirstLaunch():LiveData<Boolean> {
+        firstLaunch.value = apiRepository.isFirstLaunch()
+        return firstLaunch
+    }
 }

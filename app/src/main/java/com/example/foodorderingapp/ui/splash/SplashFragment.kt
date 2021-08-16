@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.databinding.FragmentSplashBinding
-import com.example.foodorderingapp.ui.utils.SharedPreferencesUtil
+import com.example.foodorderingapp.data.local.SharedPreferencesManager
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
     private lateinit var _binding : FragmentSplashBinding
     private val viewModel : SplashViewModel by viewModels()
@@ -31,11 +33,14 @@ class SplashFragment : Fragment() {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                SharedPreferencesUtil.initSharedPreferences(requireContext())
-                when(SharedPreferencesUtil.getFirstLaunch()){
-                    true -> findNavController().navigate(R.id.action_splashFragment_to_onBoarding)
-                    false -> findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-                }
+                viewModel.isFirstLaunch().observe(viewLifecycleOwner,{
+                    when(it){
+                        true -> findNavController().navigate(R.id.action_splashFragment_to_onBoarding)
+                        false -> findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                    }
+                })
+
+
 
             }
 

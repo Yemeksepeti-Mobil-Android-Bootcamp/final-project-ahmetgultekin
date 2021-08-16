@@ -1,14 +1,15 @@
-package com.example.foodorderingapp.ui.utils
+package com.example.foodorderingapp.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
 
-object SharedPreferencesUtil {
-    const val IS_FIRST_LAUNCH = "com.example.foodordering.first_launch"
+class SharedPreferencesManager(context: Context) {
     private var sharedPreferences : SharedPreferences? = null
-
-    fun initSharedPreferences(context : Context){
-        sharedPreferences = context.getSharedPreferences("sharedPreferences",Context.MODE_PRIVATE)
+    companion object{
+        const val IS_FIRST_LAUNCH = "com.example.foodordering.first_launch"
+    }
+    init {
+         sharedPreferences = context.getSharedPreferences("sharedPreferencesUtil", Context.MODE_PRIVATE)
     }
     fun saveString(key: String, value: String) {
         sharedPreferences?.let {
