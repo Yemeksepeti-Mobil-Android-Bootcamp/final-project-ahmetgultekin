@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/restaurantFragment">
+    <fragment
+        android:id="@+id/restaurantFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.restaurant.RestaurantFragment"
+        android:label="RestaurantFragment"
+        tools:layout="@layout/fragment_restaurant">
+        <action
+            android:id="@+id/action_restaurantFragment_to_restaurantDetailFragment"
+            app:destination="@id/restaurantDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bagFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.bag.BagFragment"
+        android:label="BagFragment"
+        tools:layout="@layout/fragment_bag"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/restaurantDetailFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.restaurantDetail.RestaurantDetailFragment"
+        android:label="RestaurantDetailFragment"
+        tools:layout="@layout/fragment_restaurant_detail">
+        <argument
+            android:name="clickedRestaurant"
+            app:argType="com.example.foodorderingapp.data.entity.RestaurantItem" />
+    </fragment>
+</navigation>

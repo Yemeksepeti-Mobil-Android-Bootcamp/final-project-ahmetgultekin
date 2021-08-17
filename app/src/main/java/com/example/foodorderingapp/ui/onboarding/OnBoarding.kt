@@ -45,12 +45,15 @@ class OnBoarding : Fragment() {
                 super.onPageSelected(position)
                 if(position == 0){
                     binding.prevButton.visibility = View.GONE
+                    binding.nextButton.setOnClickListener {
+                        binding.viewPager.currentItem = binding.viewPager.currentItem + 1
+                    }
                 }
                 else if (position == listOfFragments.size - 1) {
                     binding.prevButton.visibility = View.VISIBLE
                     binding.nextButton.text = resources.getText(R.string.finish)
                     binding.nextButton.setOnClickListener {
-                        findNavController().navigate(R.id.action_onBoarding_to_homeFragment)
+                        findNavController().navigate(R.id.action_onBoarding_to_loginFragment)
                         viewModel.saveSituation(false)
                     }
                 } else {

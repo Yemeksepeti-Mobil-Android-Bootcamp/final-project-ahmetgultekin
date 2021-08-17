@@ -36,7 +36,7 @@ class SplashFragment : Fragment() {
                 viewModel.isFirstLaunch().observe(viewLifecycleOwner,{
                     when(it){
                         true -> findNavController().navigate(R.id.action_splashFragment_to_onBoarding)
-                        false -> findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                        false -> findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                     }
                 })
 
