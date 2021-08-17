@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/restaurantDetailImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/restaurantDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantDetailImage"
+        tools:text="Ale Sushi"
+        android:textColor="@color/bold_green"/>
+
+    <TextView
+        android:id="@+id/restaurantDetailCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/restaurantDetailName"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantDetailName"
+        tools:text="Pizza,Burger" />
+
+    <TextView
+        android:id="@+id/restaurantDetailCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/restaurantDetailCategory"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantDetailCategory"
+        tools:text="Izmir" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/restaurantMenuRecycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantDetailCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
