@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:layoutDescription="@xml/fragment_restaurant_detail_scene">
 
     <ImageView
         android:id="@+id/restaurantDetailImage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -17,20 +19,19 @@
         android:id="@+id/restaurantDetailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/bold_green"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurantDetailImage"
-        tools:text="Ale Sushi"
-        android:textColor="@color/bold_green"/>
+        tools:text="Ale Sushi" />
 
     <TextView
         android:id="@+id/restaurantDetailCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/restaurantDetailName"
         app:layout_constraintTop_toBottomOf="@+id/restaurantDetailName"
         tools:text="Pizza,Burger" />
@@ -39,11 +40,20 @@
         android:id="@+id/restaurantDetailCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/restaurantDetailCategory"
         app:layout_constraintTop_toBottomOf="@+id/restaurantDetailCategory"
         tools:text="Izmir" />
+
+    <TextView
+        android:id="@+id/menuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu"
+        android:textColor="@color/bold_green"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/restaurantDetailCity"
+        app:layout_constraintTop_toBottomOf="@id/restaurantDetailCity" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/restaurantMenuRecycler"
@@ -52,6 +62,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantDetailCity" />
+        app:layout_constraintTop_toBottomOf="@+id/menuText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

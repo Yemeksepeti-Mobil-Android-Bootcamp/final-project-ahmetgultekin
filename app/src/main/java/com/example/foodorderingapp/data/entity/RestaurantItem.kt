@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class RestaurantItem(
     val name : String,
-    val ingredients : String,
     val address : String,
     val category : String,
     val deliveryInfo : String,

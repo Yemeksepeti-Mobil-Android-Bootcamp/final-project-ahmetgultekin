@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.foodorderingapp.R
 import com.example.foodorderingapp.data.entity.FoodItem
 import com.example.foodorderingapp.databinding.FragmentRestaurantDetailBinding
+import com.example.foodorderingapp.utils.IFoodListener
 
-class RestaurantDetailFragment: Fragment() {
+class RestaurantDetailFragment: Fragment(),IFoodListener {
     private lateinit var binding : FragmentRestaurantDetailBinding
     private val args: RestaurantDetailFragmentArgs by navArgs()
     private val viewModel : RestaurantDetailViewModel by viewModels()
@@ -43,6 +46,7 @@ class RestaurantDetailFragment: Fragment() {
         menu.add(FoodItem("Pizza","39.99 TL","https://pasaportpizza.com/RESIM/pizza-pasaport-luna.png",ingredients))
         val adapter = MenuAdapter()
         adapter.setFoods(menu)
+        adapter.setListener(this)
         binding.restaurantMenuRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         binding.restaurantMenuRecycler.adapter = adapter
         viewModel.setClickedRestaurant(args.clickedRestaurant)
@@ -52,6 +56,11 @@ class RestaurantDetailFragment: Fragment() {
             binding.restaurantDetailCity.text = it.address
             Glide.with(requireContext()).load(it.imageUrl).into(binding.restaurantDetailImage)
         })
+    }
+
+    override fun onClick(foodItem: FoodItem) {
+        val action = RestaurantDetailFragmentDirections.actionRestaurantDetailFragmentToFoodDetailFragment(foodItem)
+        findNavController().navigate(action)
     }
 
 }

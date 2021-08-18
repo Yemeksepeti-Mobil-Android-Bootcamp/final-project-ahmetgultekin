@@ -11,4 +11,6 @@
     <string name="surname">Surname</string>
     <string name="phone_number">Phone Number</string>
     <string name="sign_up">Sign Up</string>
+    <string name="menu">Menu</string>
+    <string name="categories">Categories</string>
 </resources>
