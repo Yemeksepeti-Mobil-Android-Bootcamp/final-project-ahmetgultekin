@@ -36,30 +36,24 @@ class RestaurantDetailFragment: Fragment(),IFoodListener {
     }
 
     fun initViews(){
-        val ingredients = ArrayList<String>()
-        ingredients.add("Sucuk")
-        ingredients.add("Sosis")
-        ingredients.add("Salam")
-        menu.add(FoodItem("Pizza","39.99 TL","https://pasaportpizza.com/RESIM/pizza-pasaport-luna.png",ingredients))
-        menu.add(FoodItem("Pizza","39.99 TL","https://pasaportpizza.com/RESIM/pizza-pasaport-luna.png",ingredients))
-        menu.add(FoodItem("Pizza","39.99 TL","https://pasaportpizza.com/RESIM/pizza-pasaport-luna.png",ingredients))
-        menu.add(FoodItem("Pizza","39.99 TL","https://pasaportpizza.com/RESIM/pizza-pasaport-luna.png",ingredients))
+
         val adapter = MenuAdapter()
-        adapter.setFoods(menu)
+        val arrayList = ArrayList<FoodItem>(args.clickedRestaurant.menu)
+        adapter.setFoods(arrayList)
         adapter.setListener(this)
         binding.restaurantMenuRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         binding.restaurantMenuRecycler.adapter = adapter
         viewModel.setClickedRestaurant(args.clickedRestaurant)
         viewModel.getClickedRestaurant().observe(viewLifecycleOwner,{
             binding.restaurantDetailName.text = it.name
-            binding.restaurantDetailCategory.text  = it.category
+            binding.restaurantDetailCategory.text  = it.category.categoryName
             binding.restaurantDetailCity.text = it.address
             Glide.with(requireContext()).load(it.imageUrl).into(binding.restaurantDetailImage)
         })
     }
 
     override fun onClick(foodItem: FoodItem) {
-        val action = RestaurantDetailFragmentDirections.actionRestaurantDetailFragmentToFoodDetailFragment(foodItem)
+        val action = RestaurantDetailFragmentDirections.actionRestaurantDetailFragmentToFoodDetailFragment(foodItem,args.clickedRestaurant.name)
         findNavController().navigate(action)
     }
 

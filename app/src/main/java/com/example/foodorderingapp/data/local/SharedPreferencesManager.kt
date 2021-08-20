@@ -8,6 +8,7 @@ class SharedPreferencesManager(context: Context) {
     companion object{
         const val IS_FIRST_LAUNCH = "com.example.foodordering.first_launch"
         const val IS_BASKET_EMPTY = "com.example.foodordering.empty_basket"
+        const val TOKEN = "com.example.foodordering.token"
     }
     init {
          sharedPreferences = context.getSharedPreferences("sharedPreferencesUtil", Context.MODE_PRIVATE)
@@ -38,5 +39,11 @@ class SharedPreferencesManager(context: Context) {
     }
     fun basketSet(boolean: Boolean){
         saveBoolean(IS_BASKET_EMPTY,boolean)
+    }
+    fun setToken(token : String){
+        saveString(TOKEN,token)
+    }
+    fun getToken():String?{
+        return sharedPreferences!!.getString(TOKEN,null)
     }
 }

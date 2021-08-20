@@ -28,7 +28,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.FoodHolder>() {
     class FoodHolder(private val binding: MenuItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(food : FoodItem,listener: IFoodListener?){
             binding.foodName.text = food.name
-            binding.foodPrice.text = food.price
+            binding.foodPrice.text = food.price.toString()
             var ingredients : String =""
             food.ingredients.forEach {
                 ingredients += "$it,"

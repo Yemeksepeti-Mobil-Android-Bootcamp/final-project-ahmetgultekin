@@ -15,4 +15,7 @@ class SplashViewModel @Inject constructor(val apiRepository: ApiRepository) : Vi
         firstLaunch.value = apiRepository.isFirstLaunch()
         return firstLaunch
     }
+    fun getToken() : String?{
+        return apiRepository.getToken()
+    }
 }

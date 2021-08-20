@@ -13,8 +13,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.data.entity.RestaurantItem
+import com.example.foodorderingapp.data.entity.RestaurantResponseItem
 import com.example.foodorderingapp.databinding.FragmentRestaurantBinding
 import com.example.foodorderingapp.utils.IRestaurantListener
+import com.example.foodorderingapp.utils.Resource
 import com.example.foodorderingapp.utils.getCategory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
@@ -24,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RestaurantFragment : Fragment(),IRestaurantListener {
     private lateinit var binding : FragmentRestaurantBinding
-    private val restaurant = ArrayList<RestaurantItem>()
+  //  private val restaurant = ArrayList<RestaurantItem>()
     private  var categories = ArrayList<String>()
     private val viewModel : RestaurantViewModel by viewModels()
     override fun onCreateView(
@@ -33,13 +35,11 @@ class RestaurantFragment : Fragment(),IRestaurantListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRestaurantBinding.inflate(inflater,container,false)
-        Log.v("Tag","onCreateView")
-
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.v("Tag","onViewCreated")
+        selectedCategory()
         initViews()
     }
     fun initViews(){
@@ -47,31 +47,80 @@ class RestaurantFragment : Fragment(),IRestaurantListener {
             categories.forEach {
                 addChip(it,binding.chipGroup)
             }
-            Log.v("Tag","Size ${binding.chipGroup.size}")
-        restaurant.add(RestaurantItem("Pizza Max","İzmir","Pizza,Burger","","","https://avechotel.com.tr/wp-content/uploads/2020/06/carne16.jpg","","",""))
-        restaurant.add(RestaurantItem("Pizza Max","İzmir","Pizza,Burger","","","https://avechotel.com.tr/wp-content/uploads/2020/06/carne16.jpg","","",""))
-        restaurant.add(RestaurantItem("Pizza Max","İzmir","Pizza,Burger","","","https://avechotel.com.tr/wp-content/uploads/2020/06/carne16.jpg","","",""))
-        restaurant.add(RestaurantItem("Pizza Max","İzmir","Pizza,Burger","","","https://avechotel.com.tr/wp-content/uploads/2020/06/carne16.jpg","","",""))
-        val adapter = RestaurantAdapter()
-        adapter.setRestaurants(restaurant)
         binding.restaurantRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         binding.restaurantRecycler.setHasFixedSize(true)
-        binding.restaurantRecycler.adapter = adapter
-        adapter.setListener(this)
+    }
+    private fun selectedCategory() {
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            val chip: Chip? = binding.chipGroup.findViewById<Chip>(binding.chipGroup.checkedChipId)
+            val clickedCategory :String? = chip?.text.toString().lowercase()
+            if(clickedCategory != null) {
+                if (clickedCategory == "all") {
+                    viewModel.getAllRestaurants().observe(viewLifecycleOwner, {
+                        when (it.status) {
+                            Resource.Status.LOADING -> {
+                                Log.v("Tag", "Loading")
+                                binding.progressBar.visibility = View.VISIBLE
+                            }
+                            Resource.Status.ERROR -> {
+                                Log.v("Tag", it.message!!)
+                                binding.progressBar.visibility = View.GONE
+                            }
+                            Resource.Status.SUCCESS -> {
+                                Log.v("Tag", "Succes")
+                                val adapter = RestaurantAdapter()
+                                binding.progressBar.visibility = View.GONE
+                                adapter.setRestaurants(it.data!!)
+                                binding.restaurantRecycler.setHasFixedSize(true)
+                                binding.restaurantRecycler.adapter = adapter
+                                adapter.setListener(this)
+                            }
+                        }
+                    })
+                } else {
+                    viewModel.getRestaurantByCategory(clickedCategory).observe(viewLifecycleOwner, {
+                        when (it.status) {
+                            Resource.Status.LOADING -> {
+                                binding.progressBar.visibility = View.VISIBLE
+                            }
+                            Resource.Status.ERROR -> {
+                                Log.v("Tag", it.message!!)
+                                binding.progressBar.visibility = View.GONE
+                            }
+                            Resource.Status.SUCCESS -> {
+                                Log.v("Tag", "Succes")
+                                binding.progressBar.visibility = View.GONE
+                                val arrayList =
+                                    ArrayList<RestaurantResponseItem>(it.data!!.restaurants)
+                                Log.v("Tag", "Size of the array ${it.data.restaurants.size}")
+                                val adapter = RestaurantAdapter()
+                                binding.progressBar.visibility = View.GONE
+                                adapter.setRestaurants(arrayList)
+                                binding.restaurantRecycler.setHasFixedSize(true)
+                                binding.restaurantRecycler.adapter = adapter
+                                adapter.setListener(this)
+                            }
+                        }
+                    })
+                }
+            }
+
+
+
+        }
     }
 
 
-    override fun onClick(restaurantItem: RestaurantItem) {
+    override fun onClick(restaurantItem: RestaurantResponseItem) {
         val action = RestaurantFragmentDirections.actionRestaurantFragmentToRestaurantDetailFragment(restaurantItem)
-
         findNavController().navigate(action)
     }
     private fun addChip(pItem: String, pChipGroup: ChipGroup) {
         val lChip = layoutInflater.inflate(R.layout.single_chip_layout, binding.chipGroup, false) as Chip
+        lChip.text = pItem
         if(pItem == "All"){
             lChip.isChecked = true
         }
-        lChip.text = pItem
         lChip.setTextColor(resources.getColor(R.color.black))
         lChip.textSize = 18F
         pChipGroup.addView(lChip, pChipGroup.childCount - 1)

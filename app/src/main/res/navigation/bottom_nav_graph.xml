@@ -28,12 +28,12 @@
         android:name="com.example.foodorderingapp.ui.bottomNavigation.restaurantDetail.RestaurantDetailFragment"
         android:label="RestaurantDetailFragment"
         tools:layout="@layout/fragment_restaurant_detail">
-        <argument
-            android:name="clickedRestaurant"
-            app:argType="com.example.foodorderingapp.data.entity.RestaurantItem" />
         <action
             android:id="@+id/action_restaurantDetailFragment_to_foodDetailFragment"
             app:destination="@id/foodDetailFragment" />
+        <argument
+            android:name="clickedRestaurant"
+            app:argType="com.example.foodorderingapp.data.entity.RestaurantResponseItem" />
     </fragment>
     <fragment
         android:id="@+id/foodDetailFragment"
@@ -43,5 +43,8 @@
         <argument
             android:name="foodClicked"
             app:argType="com.example.foodorderingapp.data.entity.FoodItem" />
+        <argument
+            android:name="restaurantName"
+            app:argType="string" />
     </fragment>
 </navigation>

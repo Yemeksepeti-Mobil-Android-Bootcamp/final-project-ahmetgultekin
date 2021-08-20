@@ -36,12 +36,12 @@ class SplashFragment : Fragment() {
                 viewModel.isFirstLaunch().observe(viewLifecycleOwner,{
                     when(it){
                         true -> findNavController().navigate(R.id.action_splashFragment_to_onBoarding)
-                        false -> findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                        false -> {
+                            if(viewModel.getToken().isNullOrEmpty()) findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                            else findNavController().navigate(R.id.action_splashFragment_to_bottomNavigationFragment)
+                        }
                     }
                 })
-
-
-
             }
 
             override fun onAnimationCancel(animation: Animator?) {

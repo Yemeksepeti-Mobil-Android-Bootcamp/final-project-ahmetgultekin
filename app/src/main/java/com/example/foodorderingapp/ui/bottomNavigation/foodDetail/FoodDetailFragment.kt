@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.foodorderingapp.R
+import com.example.foodorderingapp.data.entity.BagItem
 import com.example.foodorderingapp.data.entity.FoodItem
 import com.example.foodorderingapp.databinding.FragmentFoodDetailBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -58,12 +59,13 @@ class FoodDetailFragment : Fragment() {
         viewModel.setFood(args.foodClicked)
         viewModel.getFood().observe(viewLifecycleOwner,{ food ->
             binding.name.text = food.name
-            binding.foodPrice.text = food.price
+            binding.foodPrice.text = food.price.toString()
             Glide.with(binding.root).load(food.imageUrl).into(binding.foodImageView)
         })
         binding.submit.setOnClickListener {
             Toast.makeText(requireContext(),"Added to the bag",Toast.LENGTH_SHORT).show()
-            viewModel.addToBag(args.foodClicked)
+            val bagItem = BagItem(args.restaurantName,1,args.foodClicked)
+            viewModel.addToBag(bagItem)
             var badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation).getOrCreateBadge(R.id.bagFragment)
             badge.isVisible = true
             findNavController().navigateUp()

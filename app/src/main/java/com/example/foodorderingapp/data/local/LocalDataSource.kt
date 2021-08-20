@@ -1,5 +1,6 @@
 package com.example.foodorderingapp.data.local
 
+import com.example.foodorderingapp.data.entity.BagItem
 import com.example.foodorderingapp.data.entity.FoodItem
 import javax.inject.Inject
 
@@ -23,10 +24,20 @@ class LocalDataSource @Inject constructor(
         return sharedPreferencesManager.isBasketEmpty()
     }
 
-    fun addToBag(foodItem: FoodItem){
-        paperManager.addToBag(foodItem)
+    fun setToken(token : String){
+        sharedPreferencesManager.setToken(token)
     }
-    fun getBagItems():ArrayList<FoodItem>{
+    fun getToken():String?{
+        return sharedPreferencesManager.getToken()
+    }
+
+    fun addToBag(bagItem: BagItem){
+        paperManager.addToBag(bagItem)
+    }
+    fun getBagItems():ArrayList<BagItem>{
         return paperManager.getBagItems()
+    }
+    fun removeBagItem(bagItem: BagItem){
+        paperManager.removeBagItem(bagItem)
     }
 }

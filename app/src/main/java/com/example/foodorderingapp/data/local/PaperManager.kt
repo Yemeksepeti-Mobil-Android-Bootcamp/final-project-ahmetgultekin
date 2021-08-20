@@ -2,11 +2,11 @@ package com.example.foodorderingapp.data.local
 
 import android.content.Context
 import android.util.Log
+import com.example.foodorderingapp.data.entity.BagItem
 import com.example.foodorderingapp.data.entity.FoodItem
 import io.paperdb.Paper
 
 class PaperManager(context : Context) {
-    private val items = ArrayList<FoodItem>()
     companion object{
         const val BAG_ITEM = "com.example.foodorderingapp.bag_item"
     }
@@ -14,13 +14,17 @@ class PaperManager(context : Context) {
         Paper.init(context)
     }
 
-    fun addToBag(foodItem: FoodItem){
-        val bagItems = Paper.book().read(BAG_ITEM,ArrayList<FoodItem>())
-        bagItems.add(foodItem)
-        Log.v("Tag",foodItem.name)
+    fun addToBag(bagItem: BagItem){
+        val bagItems = Paper.book().read(BAG_ITEM,ArrayList<BagItem>())
+        bagItems.add(bagItem)
         Paper.book().write(BAG_ITEM,bagItems)
     }
-    fun getBagItems(): ArrayList<FoodItem> {
+    fun getBagItems(): ArrayList<BagItem> {
         return Paper.book().read(BAG_ITEM, ArrayList())
+    }
+    fun removeBagItem(bagItem: BagItem){
+        val bagItems = Paper.book().read(BAG_ITEM,ArrayList<BagItem>())
+        bagItems.remove(bagItem)
+        Paper.book().write(BAG_ITEM,bagItems)
     }
 }
