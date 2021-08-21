@@ -1,5 +1,6 @@
 package com.example.foodorderingapp.ui.bottomNavigation.bag
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,9 +31,19 @@ class BagItemAdapter() : RecyclerView.Adapter<BagItemAdapter.BagItemViewHolder>(
             binding.bagItemName.text = bagItem.foodItem.name
             binding.bagItemRestaurant.text = bagItem.restaurantName
             Glide.with(binding.root).load(bagItem.foodItem.imageUrl).into(binding.bagItemImage)
-            binding.bagItemPrice.text = bagItem.foodItem.price.toString()
+            binding.bagItemPrice.text = "${bagItem.foodItem.price} TL"
             binding.bagItemRemove.setOnClickListener {
                 listener.onClick(bagItem)
+            }
+            binding.bagItemDecrease.setOnClickListener {
+                if(bagItem.quantity > 1) bagItem.quantity = bagItem.quantity.minus(1)
+                binding.bagItemQuantity.text = bagItem.quantity.toString()
+                binding.bagItemPrice.text = "${bagItem.foodItem.price * bagItem.quantity} TL"
+            }
+            binding.bagItemIncrease.setOnClickListener {
+                bagItem.quantity = bagItem.quantity.plus(1)
+                binding.bagItemQuantity.text = bagItem.quantity.toString()
+                binding.bagItemPrice.text = "${bagItem.foodItem.price * bagItem.quantity} TL"
             }
         }
 

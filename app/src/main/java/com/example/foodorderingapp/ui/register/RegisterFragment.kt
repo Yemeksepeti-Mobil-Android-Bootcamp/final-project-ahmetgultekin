@@ -49,6 +49,7 @@ class RegisterFragment : Fragment() {
                     Resource.Status.SUCCESS ->{
                         findNavController().navigate(R.id.action_registerFragment_to_bottomNavigationFragment)
                         viewModel.setToken(it.data!!.token)
+                        viewModel.saveUserInfo(it.data)
                     }
                 }
             })

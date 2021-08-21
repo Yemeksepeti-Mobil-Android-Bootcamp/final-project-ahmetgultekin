@@ -1,7 +1,6 @@
-package com.example.foodorderingapp.ui.bottomNavigation.restaurantDetail
+package com.example.foodorderingapp.ui.bottomNavigation.restaurant.restaurantDetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.foodorderingapp.R
 import com.example.foodorderingapp.data.entity.FoodItem
 import com.example.foodorderingapp.databinding.FragmentRestaurantDetailBinding
 import com.example.foodorderingapp.utils.IFoodListener

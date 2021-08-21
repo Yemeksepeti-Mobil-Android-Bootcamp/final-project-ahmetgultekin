@@ -19,13 +19,8 @@
         android:label="BagFragment"
         tools:layout="@layout/fragment_bag"/>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.foodorderingapp.ui.bottomNavigation.profile.ProfileFragment"
-        android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
-    <fragment
         android:id="@+id/restaurantDetailFragment"
-        android:name="com.example.foodorderingapp.ui.bottomNavigation.restaurantDetail.RestaurantDetailFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.restaurant.restaurantDetail.RestaurantDetailFragment"
         android:label="RestaurantDetailFragment"
         tools:layout="@layout/fragment_restaurant_detail">
         <action
@@ -37,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/foodDetailFragment"
-        android:name="com.example.foodorderingapp.ui.bottomNavigation.foodDetail.FoodDetailFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.restaurant.foodDetail.FoodDetailFragment"
         android:label="FoodDetailFragment"
         tools:layout="@layout/fragment_food_detail">
         <argument
@@ -47,4 +42,18 @@
             android:name="restaurantName"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.account.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_ordersFragment2"
+            app:destination="@id/ordersFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersFragment2"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.account.orders.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
 </navigation>

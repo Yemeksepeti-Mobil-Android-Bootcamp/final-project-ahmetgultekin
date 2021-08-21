@@ -1,8 +1,6 @@
-package com.example.foodorderingapp.ui.bottomNavigation.restaurantDetail
+package com.example.foodorderingapp.ui.bottomNavigation.restaurant.restaurantDetail
 
 import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

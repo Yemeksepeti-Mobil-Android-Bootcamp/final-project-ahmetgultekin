@@ -1,4 +1,4 @@
-package com.example.foodorderingapp.ui.bottomNavigation.foodDetail
+package com.example.foodorderingapp.ui.bottomNavigation.restaurant.foodDetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

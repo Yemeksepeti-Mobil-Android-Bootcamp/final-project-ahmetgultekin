@@ -1,39 +1,20 @@
-package com.example.foodorderingapp.ui.bottomNavigation.foodDetail
+package com.example.foodorderingapp.ui.bottomNavigation.restaurant.foodDetail
 
 import androidx.fragment.app.Fragment
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.os.StrictMode
-import android.os.StrictMode.VmPolicy
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.data.entity.BagItem
-import com.example.foodorderingapp.data.entity.FoodItem
 import com.example.foodorderingapp.databinding.FragmentFoodDetailBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class FoodDetailFragment : Fragment() {

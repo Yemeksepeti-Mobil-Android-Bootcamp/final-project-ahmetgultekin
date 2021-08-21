@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -24,4 +30,105 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/selectAddressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Address"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bagItemRecycler"
+        android:visibility="gone"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/radio_button_1"
+        app:layout_constraintTop_toBottomOf="@+id/selectAddressText"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/savedAddress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Saved Address" />
+        <TextView
+            android:id="@+id/savedAddressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="Karabaglar Mh. 5770/19 Sk. no:4 daire:2 Karabaglar/İzmir"/>
+
+        <RadioButton
+            android:id="@+id/newAddress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="New Address" />
+
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newAddressTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter new address"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/paymentMethodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newAddressTextField"
+        android:visibility="gone"/>
+    <RadioGroup
+        android:id="@+id/paymentRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/radio_button_1"
+        app:layout_constraintTop_toBottomOf="@+id/paymentMethodText"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/creditCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Credit Card" />
+        <RadioButton
+            android:id="@+id/atTheDoor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="At Door" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/orderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Order"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/paymentRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

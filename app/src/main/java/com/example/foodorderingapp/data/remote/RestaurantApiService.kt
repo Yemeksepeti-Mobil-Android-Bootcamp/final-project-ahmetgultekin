@@ -1,6 +1,7 @@
 package com.example.foodorderingapp.data.remote
 
 import com.example.foodorderingapp.data.entity.*
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,6 +21,12 @@ interface RestaurantApiService {
 
     @POST("auth/register")
     suspend fun register(@Body registerRequest: RegisterRequest) : Response<LoginResponse>
+
+    @POST("order")
+    fun order(@Body order: Order) : Call<Void>
+
+    @GET("order/{userId}")
+    suspend fun getOrders(@Path("userId") userId: String) : Response<OrderResponse>
 
     //POST api/order -> accountId,meal,resturantName, quantity,orderDate
     //GET api/order/(id)

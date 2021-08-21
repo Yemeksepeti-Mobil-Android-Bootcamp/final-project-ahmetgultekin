@@ -1,9 +1,7 @@
 package com.example.foodorderingapp.data
 
-import com.example.foodorderingapp.data.entity.BagItem
-import com.example.foodorderingapp.data.entity.FoodItem
-import com.example.foodorderingapp.data.entity.LoginRequest
-import com.example.foodorderingapp.data.entity.RegisterRequest
+import androidx.lifecycle.LiveData
+import com.example.foodorderingapp.data.entity.*
 import com.example.foodorderingapp.data.local.LocalDataSource
 import com.example.foodorderingapp.data.remote.RemoteDataSource
 import com.example.foodorderingapp.utils.performNetworkOperation
@@ -41,6 +39,12 @@ class ApiRepository @Inject constructor(
     fun getToken(): String?{
         return localDataSource.getToken()
     }
+    fun saveUserInfo(user : LoginResponse){
+        localDataSource.saveUserInfo(user)
+    }
+    fun getUserInfo() : LoginResponse?{
+        return localDataSource.getUserInfo()
+    }
 
     fun getAllRestaurants() = performNetworkOperation { remoteDataSource.getAllRestaurants() }
 
@@ -49,4 +53,10 @@ class ApiRepository @Inject constructor(
     fun login(loginRequest: LoginRequest) = performNetworkOperation { remoteDataSource.login(loginRequest) }
 
     fun register(registerRequest: RegisterRequest) = performNetworkOperation { remoteDataSource.register(registerRequest) }
+
+    fun getOrders(userId: String) = performNetworkOperation { remoteDataSource.getOrders(userId) }
+
+    fun order(order: Order):LiveData<Boolean> {
+        return remoteDataSource.order(order)
+    }
 }

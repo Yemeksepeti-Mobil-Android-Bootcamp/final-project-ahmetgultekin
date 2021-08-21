@@ -1,9 +1,8 @@
-package com.example.foodorderingapp.ui.bottomNavigation.restaurantDetail
+package com.example.foodorderingapp.ui.bottomNavigation.restaurant.restaurantDetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.foodorderingapp.data.entity.RestaurantItem
 import com.example.foodorderingapp.data.entity.RestaurantResponseItem
 
 class RestaurantDetailViewModel : ViewModel() {

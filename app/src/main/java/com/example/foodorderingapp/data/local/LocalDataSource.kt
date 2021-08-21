@@ -2,6 +2,7 @@ package com.example.foodorderingapp.data.local
 
 import com.example.foodorderingapp.data.entity.BagItem
 import com.example.foodorderingapp.data.entity.FoodItem
+import com.example.foodorderingapp.data.entity.LoginResponse
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
@@ -39,5 +40,12 @@ class LocalDataSource @Inject constructor(
     }
     fun removeBagItem(bagItem: BagItem){
         paperManager.removeBagItem(bagItem)
+    }
+
+    fun saveUserInfo(user: LoginResponse){
+        paperManager.saveUserInfo(user)
+    }
+    fun getUserInfo():LoginResponse?{
+        return paperManager.getUserInfo()
     }
 }

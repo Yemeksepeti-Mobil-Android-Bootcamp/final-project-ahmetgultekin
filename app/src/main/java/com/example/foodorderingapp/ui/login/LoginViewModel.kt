@@ -18,4 +18,7 @@ class LoginViewModel @Inject constructor(private val apiRepository: ApiRepositor
     fun setToken(token : String){
         apiRepository.setToken(token)
     }
+    fun saveUserInfo(user : LoginResponse){
+        apiRepository.saveUserInfo(user)
+    }
 }
