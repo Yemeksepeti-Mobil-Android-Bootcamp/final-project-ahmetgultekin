@@ -41,6 +41,9 @@ class LocalDataSource @Inject constructor(
     fun removeBagItem(bagItem: BagItem){
         paperManager.removeBagItem(bagItem)
     }
+    fun deleteBag(){
+        paperManager.deleteBag()
+    }
 
     fun saveUserInfo(user: LoginResponse){
         paperManager.saveUserInfo(user)

@@ -54,6 +54,7 @@
             tools:text="Payment: Card" />
 
         <TextView
+            android:id="@+id/ordersDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/ordersPaymentMethod"

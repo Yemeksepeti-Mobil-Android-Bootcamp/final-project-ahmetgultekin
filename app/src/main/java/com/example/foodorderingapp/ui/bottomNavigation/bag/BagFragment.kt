@@ -53,6 +53,8 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
                 binding!!.savedAddressText.visibility = View.VISIBLE
                 binding!!.selectAddressText.visibility = View.VISIBLE
                 binding!!.orderButton.visibility = View.VISIBLE
+                binding!!.emptyImage.visibility = View.GONE
+                binding!!.emptyText.visibility = View.GONE
             }
         })
         binding!!.orderButton.setOnClickListener {
@@ -82,7 +84,7 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
         binding!!.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.savedAddress -> {
-                    binding!!.newAddressTextField.visibility = View.VISIBLE
+                    binding!!.newAddressTextField.visibility = View.GONE
                 }
                 R.id.newAddress -> {
                     binding!!.newAddressTextField.visibility = View.VISIBLE
@@ -114,6 +116,8 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
                 binding!!.savedAddressText.visibility = View.GONE
                 binding!!.selectAddressText.visibility = View.GONE
                 binding!!.orderButton.visibility = View.GONE
+                binding!!.emptyImage.visibility = View.VISIBLE
+                binding!!.emptyText.visibility = View.VISIBLE
             }
         })
     }

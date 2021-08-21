@@ -29,6 +29,9 @@ class PaperManager(context : Context) {
         bagItems.remove(bagItem)
         Paper.book().write(BAG_ITEM,bagItems)
     }
+    fun deleteBag(){
+        Paper.book().delete(BAG_ITEM)
+    }
     fun saveUserInfo(user: LoginResponse){
         Paper.book().write(USER_LOGGED_IN,user)
 

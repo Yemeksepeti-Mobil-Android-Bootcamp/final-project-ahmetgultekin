@@ -16,4 +16,7 @@ class AccountViewModel @Inject constructor(private val apiRepository: ApiReposit
     fun setToken(token : String){
         apiRepository.setToken(token)
     }
+    fun deleteBag(){
+        apiRepository.deleteBag()
+    }
 }

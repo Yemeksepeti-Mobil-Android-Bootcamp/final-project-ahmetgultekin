@@ -36,6 +36,7 @@ class AccountFragment : Fragment() {
         binding.logout.setOnClickListener {
             viewModel.setToken("")
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigateUp()
+            viewModel.deleteBag()
         }
     }
     fun initViews(){

@@ -37,7 +37,8 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {
             binding.ordersRestaurantName.text = order.restaurant
             binding.ordersPrice.text = "${order.price} TL"
             binding.ordersQuantity.text = "Quantity: ${order.quantity}"
-            binding.ordersPaymentMethod.text = order.paymentType[0]
+            binding.ordersPaymentMethod.text = "Payment Method: ${order.paymentType[0]}"
+            binding.ordersDate.text = order.orderDate
             Glide.with(binding.root).load(order.meal.imageUrl).into(binding.imageView2)
         }
 

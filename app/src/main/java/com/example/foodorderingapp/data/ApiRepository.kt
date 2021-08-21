@@ -33,6 +33,9 @@ class ApiRepository @Inject constructor(
     fun removeBagItem(bagItem: BagItem){
         localDataSource.removeBagItem(bagItem)
     }
+    fun deleteBag(){
+        localDataSource.deleteBag()
+    }
     fun setToken(token : String ){
         localDataSource.setToken(token)
     }

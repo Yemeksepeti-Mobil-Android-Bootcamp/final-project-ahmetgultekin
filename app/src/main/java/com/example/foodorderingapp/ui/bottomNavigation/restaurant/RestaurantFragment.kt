@@ -39,8 +39,26 @@ class RestaurantFragment : Fragment(),IRestaurantListener {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        selectedCategory()
         initViews()
+        selectedCategory()
+        viewModel.getAllRestaurants().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                Resource.Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                }
+                Resource.Status.SUCCESS -> {
+                    val adapter = RestaurantAdapter()
+                    binding.progressBar.visibility = View.GONE
+                    adapter.setRestaurants(it.data!!)
+                    binding.restaurantRecycler.adapter = adapter
+                    adapter.setListener(this)
+                }
+            }
+        })
+
     }
     fun initViews(){
         categories = getCategory()
@@ -59,15 +77,12 @@ class RestaurantFragment : Fragment(),IRestaurantListener {
                     viewModel.getAllRestaurants().observe(viewLifecycleOwner, {
                         when (it.status) {
                             Resource.Status.LOADING -> {
-                                Log.v("Tag", "Loading")
                                 binding.progressBar.visibility = View.VISIBLE
                             }
                             Resource.Status.ERROR -> {
-                                Log.v("Tag", it.message!!)
                                 binding.progressBar.visibility = View.GONE
                             }
                             Resource.Status.SUCCESS -> {
-                                Log.v("Tag", "Succes")
                                 val adapter = RestaurantAdapter()
                                 binding.progressBar.visibility = View.GONE
                                 adapter.setRestaurants(it.data!!)
