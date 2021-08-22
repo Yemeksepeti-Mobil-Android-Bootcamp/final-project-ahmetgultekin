@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.data.entity.OrderResponse
@@ -63,6 +64,9 @@ class OrdersFragment : Fragment() {
                 }
             }
         })
+        binding.ordersBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
 

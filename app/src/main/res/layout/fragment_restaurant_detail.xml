@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_restaurant_detail_scene">
 
+
     <ImageView
         android:id="@+id/restaurantDetailImage"
         android:layout_width="match_parent"
