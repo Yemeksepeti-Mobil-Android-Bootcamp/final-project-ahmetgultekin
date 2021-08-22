@@ -145,9 +145,9 @@
         android:layout_height="wrap_content"
         android:text="Your bag is empty!"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emptyImage" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

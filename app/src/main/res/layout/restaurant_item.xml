@@ -20,7 +20,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/restaurantName"

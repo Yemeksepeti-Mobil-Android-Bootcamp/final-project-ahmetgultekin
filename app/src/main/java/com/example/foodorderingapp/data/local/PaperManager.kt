@@ -36,6 +36,9 @@ class PaperManager(context : Context) {
         Paper.book().write(USER_LOGGED_IN,user)
 
     }
+    fun deleteUser(){
+        Paper.book().delete(USER_LOGGED_IN)
+    }
     fun getUserInfo():LoginResponse?{
         return Paper.book().read(USER_LOGGED_IN,null)
     }

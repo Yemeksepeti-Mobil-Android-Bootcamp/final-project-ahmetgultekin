@@ -26,10 +26,11 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.FoodHolder>() {
     class FoodHolder(private val binding: MenuItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(food : FoodItem,listener: IFoodListener?){
             binding.foodName.text = food.name
-            binding.foodPrice.text = food.price.toString()
+            binding.foodPrice.text = "${food.price.toString()} TL"
             var ingredients : String =""
-            food.ingredients.forEach {
-                ingredients += "$it,"
+            for(i in 0..food.ingredients.size-1){
+                if(i == food.ingredients.size-1) ingredients += food.ingredients[i]
+                else ingredients += "${food.ingredients[i]},"
             }
             binding.foodIngredients.text = ingredients
             Glide.with(binding.root).load(food.imageUrl).into(binding.foodImage)

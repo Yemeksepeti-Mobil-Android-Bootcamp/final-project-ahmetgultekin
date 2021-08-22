@@ -13,13 +13,7 @@ class SharedPreferencesManager(context: Context) {
     init {
          sharedPreferences = context.getSharedPreferences("sharedPreferencesUtil", Context.MODE_PRIVATE)
     }
-    fun saveString(key: String, value: String) {
-        sharedPreferences?.let {
-            val editor = it.edit()
-            editor.putString(key, value)
-            editor.apply()
-        }
-    }
+
     fun saveBoolean(key: String, value: Boolean) {
         sharedPreferences?.let {
             val editor = it.edit()
@@ -34,16 +28,5 @@ class SharedPreferencesManager(context: Context) {
     fun getFirstLaunch() : Boolean{
         return sharedPreferences!!.getBoolean(IS_FIRST_LAUNCH,true)
     }
-    fun isBasketEmpty() : Boolean{
-        return sharedPreferences!!.getBoolean(IS_BASKET_EMPTY,true)
-    }
-    fun basketSet(boolean: Boolean){
-        saveBoolean(IS_BASKET_EMPTY,boolean)
-    }
-    fun setToken(token : String){
-        saveString(TOKEN,token)
-    }
-    fun getToken():String?{
-        return sharedPreferences!!.getString(TOKEN,null)
-    }
+
 }

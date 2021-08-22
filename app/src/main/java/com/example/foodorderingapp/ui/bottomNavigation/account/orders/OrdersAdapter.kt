@@ -1,15 +1,11 @@
 package com.example.foodorderingapp.ui.bottomNavigation.account.orders
 
-import android.os.Bundle
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.foodorderingapp.data.entity.Order
 import com.example.foodorderingapp.data.entity.OrderResponseItem
-import com.example.foodorderingapp.databinding.FragmentOrdersBinding
 import com.example.foodorderingapp.databinding.OrdersItemBinding
 
 class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {

@@ -1,5 +1,6 @@
 package com.example.foodorderingapp.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.foodorderingapp.data.entity.*
 import com.example.foodorderingapp.data.local.LocalDataSource
@@ -18,12 +19,6 @@ class ApiRepository @Inject constructor(
     fun saveSituation(situaiton:Boolean){
         localDataSource.saveSituation(situaiton)
     }
-    fun basketSituation(situation: Boolean){
-        localDataSource.basketSituation(situation)
-    }
-    fun isBasketEmpty() : Boolean{
-        return localDataSource.isBasketEmpty()
-    }
     fun addToBag(bagItem: BagItem){
         localDataSource.addToBag(bagItem)
     }
@@ -36,12 +31,10 @@ class ApiRepository @Inject constructor(
     fun deleteBag(){
         localDataSource.deleteBag()
     }
-    fun setToken(token : String ){
-        localDataSource.setToken(token)
+    fun deleteUser(){
+        localDataSource.deleteUser()
     }
-    fun getToken(): String?{
-        return localDataSource.getToken()
-    }
+
     fun saveUserInfo(user : LoginResponse){
         localDataSource.saveUserInfo(user)
     }
@@ -49,7 +42,7 @@ class ApiRepository @Inject constructor(
         return localDataSource.getUserInfo()
     }
 
-    fun getAllRestaurants() = performNetworkOperation { remoteDataSource.getAllRestaurants() }
+    fun getAllRestaurants(page:Int) = performNetworkOperation { remoteDataSource.getAllRestaurants(page) }
 
     fun getRestaurantByCategory(categoryName : String) = performNetworkOperation { remoteDataSource.getRestaurantsByCategory(categoryName) }
 
@@ -59,7 +52,9 @@ class ApiRepository @Inject constructor(
 
     fun getOrders(userId: String) = performNetworkOperation { remoteDataSource.getOrders(userId) }
 
-    fun order(order: Order):LiveData<Boolean> {
-        return remoteDataSource.order(order)
+    fun updateAddress(addressRequest: AddressRequest) = performNetworkOperation { remoteDataSource.updateAddress(addressRequest) }
+
+    suspend fun order(order: Order) {
+        remoteDataSource.order(order)
     }
 }

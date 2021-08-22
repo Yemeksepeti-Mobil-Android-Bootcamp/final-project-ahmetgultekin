@@ -33,22 +33,29 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         setUserInfo()
+        //deletes bag and logged in user when log out
         binding.logout.setOnClickListener {
-            viewModel.setToken("")
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigateUp()
             viewModel.deleteBag()
+            viewModel.deleteUser()
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigateUp()
         }
     }
     fun initViews(){
-        val sections = getSections()
-        binding.accountSections.adapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_list_item_1,
-            sections)
-        binding.accountSections.setOnItemClickListener { parent, view, position, id ->
-            when(sections[position]){
-                "Orders" -> findNavController().navigate(R.id.action_accountFragment_to_ordersFragment2)
-            }
+        binding.newAddressButton.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_saveAddressFragment)
+        }
+        val user = viewModel.getUserInfo()
+        if(user!!.address.size > 0){
+            binding.noAddressesText.visibility = View.GONE
+            binding.newAddressButton.visibility = View.GONE
+            binding.savedAddress.text = user.address[0]
+            Log.v("Tag",user.toString())
+        }
+        binding.toOrdersButton.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_ordersFragment2)
         }
     }
+
     fun setUserInfo(){
         val user : LoginResponse? = viewModel.getUserInfo()
         binding.accountEmail.text = user?.email
@@ -56,4 +63,6 @@ class AccountFragment : Fragment() {
         binding.accountPhone.text = "Tel: ${user?.phone}"
         Log.v("Tag",user!!.id)
     }
+
+
 }

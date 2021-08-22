@@ -2,6 +2,7 @@ package com.example.foodorderingapp.ui.bottomNavigation.restaurant.foodDetail
 
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,10 +43,22 @@ class FoodDetailFragment : Fragment() {
             binding.name.text = food.name
             binding.foodPrice.text = food.price.toString()
             Glide.with(binding.root).load(food.imageUrl).into(binding.foodImageView)
+            var ingredients : String =""
+            for(i in 0..food.ingredients.size-1){
+                if(i == food.ingredients.size-1) ingredients += food.ingredients[i]
+                else ingredients += "${food.ingredients[i]},"
+            }
+            binding.ingredients.text = ingredients
         })
-        binding.submit.setOnClickListener {
+        viewModel.getQuantity().observe(viewLifecycleOwner,{quantity ->
+            binding.foodQuantity.text = "$quantity"
+            binding.foodPrice.text = "${quantity * args.foodClicked.price} TL"
+        })
+        binding.addToBagButton.setOnClickListener {
             Toast.makeText(requireContext(),"Added to the bag",Toast.LENGTH_SHORT).show()
-            val bagItem = BagItem(args.restaurantName,1,args.foodClicked)
+            val quantity = binding.foodQuantity.text.toString()
+            Log.v("Tag",quantity)
+            val bagItem = BagItem(args.restaurantName,quantity.toInt(),args.foodClicked)
             viewModel.addToBag(bagItem)
             var badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation).getOrCreateBadge(R.id.bagFragment)
             badge.isVisible = true
@@ -55,8 +68,11 @@ class FoodDetailFragment : Fragment() {
 
 
     fun quantityListener() {
-
-        // creates the expandable list view
-
+        binding.increase.setOnClickListener {
+            viewModel.increase()
+        }
+        binding.decrease.setOnClickListener {
+            viewModel.decrease()
+        }
     }
 }

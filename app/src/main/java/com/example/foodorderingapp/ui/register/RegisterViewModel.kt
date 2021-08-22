@@ -16,9 +16,6 @@ class RegisterViewModel @Inject constructor(private val apiRepository: ApiReposi
     fun register(registerRequest: RegisterRequest):LiveData<Resource<LoginResponse>>{
         return apiRepository.register(registerRequest)
     }
-    fun setToken(token : String){
-        apiRepository.setToken(token)
-    }
     fun saveUserInfo(user : LoginResponse){
         apiRepository.saveUserInfo(user)
     }

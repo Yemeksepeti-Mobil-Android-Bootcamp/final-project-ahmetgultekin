@@ -56,7 +56,9 @@
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_bottomNavigationFragment"
-            app:destination="@id/bottomNavigationFragment" />
+            app:destination="@id/bottomNavigationFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/bottomNavigationFragment"

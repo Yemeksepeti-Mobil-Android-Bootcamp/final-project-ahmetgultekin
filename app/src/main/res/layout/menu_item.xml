@@ -25,11 +25,12 @@
 
         <TextView
             android:id="@+id/foodIngredients"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/foodName"
+            app:layout_constraintEnd_toStartOf="@+id/foodImage"
             app:layout_constraintStart_toStartOf="@+id/foodName"
+            app:layout_constraintTop_toBottomOf="@+id/foodName"
             tools:text="Sucuk,Sosis,Salam,Mısır" />
         <TextView
             android:id="@+id/foodPrice"

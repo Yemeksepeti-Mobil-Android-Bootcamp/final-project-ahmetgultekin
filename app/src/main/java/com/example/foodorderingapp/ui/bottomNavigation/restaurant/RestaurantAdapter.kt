@@ -29,7 +29,7 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewH
          fun bind(restaurant: RestaurantResponseItem, listener: IRestaurantListener?){
              binding.restaurantName.text = restaurant.name
              binding.restaurantCategory.text = restaurant.category.categoryName
-             binding.restaurantTime.text = restaurant.deliveryTime
+             binding.restaurantTime.text = "${restaurant.deliveryTime} dk"
              binding.restaurantMinOrder.text = "${restaurant.minDeliveryFee} TL"
              Glide.with(binding.root).load(restaurant.imageUrl).into(binding.restaurantPhoto)
              binding.restaurantContainer.setOnClickListener {
@@ -46,5 +46,10 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewH
     }
     fun removeListener(){
         listener = null
+    }
+    fun insertRickMortyData(list: List<RestaurantResponseItem>) {
+        val listIndex = this.restaurants.size
+        this.restaurants.addAll(ArrayList(list))
+        notifyItemInserted(listIndex)
     }
 }

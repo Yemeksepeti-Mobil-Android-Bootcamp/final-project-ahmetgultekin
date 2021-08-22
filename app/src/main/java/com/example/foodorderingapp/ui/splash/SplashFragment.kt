@@ -2,6 +2,8 @@ package com.example.foodorderingapp.ui.splash
 
 import android.animation.Animator
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,29 +30,31 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding.animationView.addAnimatorListener(object: Animator.AnimatorListener{
-            override fun onAnimationStart(animation: Animator?) {
-            }
+        viewModel.isFirstLaunch().observe(viewLifecycleOwner,{
+            when(it){
+                true -> {Handler(Looper.getMainLooper()).postDelayed({
+                    findNavController().navigate(R.id.action_splashFragment_to_onBoarding)
+                }, 500)
 
-            override fun onAnimationEnd(animation: Animator?) {
-                viewModel.isFirstLaunch().observe(viewLifecycleOwner,{
-                    when(it){
-                        true -> findNavController().navigate(R.id.action_splashFragment_to_onBoarding)
-                        false -> {
-                            if(viewModel.getToken().isNullOrEmpty()) findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-                            else findNavController().navigate(R.id.action_splashFragment_to_bottomNavigationFragment)
-                        }
+                }
+                false -> {
+                    if(viewModel.getUserInfo() == null) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                        }, 500)
+
                     }
-                })
-            }
+                    else{
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigate(R.id.action_splashFragment_to_bottomNavigationFragment)
+                        }, 500)
 
-            override fun onAnimationCancel(animation: Animator?) {
+                    }
+                }
             }
-
-            override fun onAnimationRepeat(animation: Animator?) {
-            }
-
         })
+
+
 
 
 

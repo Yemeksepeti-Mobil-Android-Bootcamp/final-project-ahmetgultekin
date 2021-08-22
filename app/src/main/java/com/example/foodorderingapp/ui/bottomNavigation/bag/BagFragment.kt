@@ -1,6 +1,8 @@
 package com.example.foodorderingapp.ui.bottomNavigation.bag
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper.getMainLooper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +41,14 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
 
     }
     fun initViews(){
+        val user = viewModel!!.getUserInfo()
+        Log.v("Tag",user.toString())
+        if(user?.address.isNullOrEmpty())
+            binding!!.savedAddressText.text = "You do not have saved address.Please go to Account and save your address"
+        else{
+            binding!!.savedAddressText.text = user!!.address[0]
+        }
+
         binding!!.bagItemRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         binding!!.bagItemRecycler.setHasFixedSize(true)
         val adapter = BagItemAdapter()
@@ -62,20 +72,22 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
         }
     }
      fun order(){
+         Log.v("Tag","assad ${binding!!.paymentRadioGroup.checkedRadioButtonId}")
 
-        viewModel.getBagItems().observe(viewLifecycleOwner,{ bagItems->
-            val userInfo = viewModel.getUserInfo()
-            val order = Order(Accid(userInfo!!.id), email = userInfo.email,bagItems[0].foodItem,"2021-08-21T14:54:59.751Z",paymentMethod,59.99,1,bagItems[0].restaurantName)
-            viewModel.order(order).observe(viewLifecycleOwner,{
-                if(it) {
-                    Toast.makeText(requireContext(),"You ordered succesfully",Toast.LENGTH_SHORT).show()
-                    findNavController().navigateUp()
-                    // bagItmeları sil
-                    }
-                else Toast.makeText(requireContext(),"Your order failed.Please try again later!",Toast.LENGTH_SHORT).show()
+             viewModel.getBagItems().observe(viewLifecycleOwner,{ bagItems->
+                 val userInfo = viewModel.getUserInfo()
+                 val order = Order(Accid(userInfo!!.id), email = userInfo.email,bagItems[0].foodItem,"2021-08-21T14:54:59.751Z",paymentMethod,bagItems[0].foodItem.price,1,bagItems[0].restaurantName)
+                 viewModel.order(order)
+                 Toast.makeText(requireContext(),"You ordered succesfully",Toast.LENGTH_SHORT).show()
+                 viewModel.deleteBag()
+                 var badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation).getOrCreateBadge(
+                     R.id.bagFragment)
+                 badge.isVisible = false
+                 Handler(getMainLooper()).postDelayed({
+                     findNavController().navigateUp()
+                 }, 500)
 
-            })
-        })
+             })
 
     }
     fun initRadioButtons(){

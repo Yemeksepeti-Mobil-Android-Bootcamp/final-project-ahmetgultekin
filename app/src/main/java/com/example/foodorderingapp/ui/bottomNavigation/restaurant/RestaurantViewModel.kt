@@ -13,8 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RestaurantViewModel @Inject constructor(val apiRepository: ApiRepository) : ViewModel() {
 
-    fun getAllRestaurants(): LiveData<Resource<RestaurantResponse>>{
-        return apiRepository.getAllRestaurants()
+    fun getAllRestaurants(page:Int): LiveData<Resource<RestaurantResponse>>{
+        return apiRepository.getAllRestaurants(page)
     }
     fun getRestaurantByCategory(categoryName : String) : LiveData<Resource<RestaurantByCategoryResponse>>{
         return apiRepository.getRestaurantByCategory(categoryName)

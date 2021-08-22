@@ -41,6 +41,8 @@ class BottomNavigationFragment : Fragment() {
             var badge = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation).getOrCreateBadge(
                 R.id.bagFragment)
             badge.isVisible = it.isNotEmpty()
+
+
         })
     }
 }

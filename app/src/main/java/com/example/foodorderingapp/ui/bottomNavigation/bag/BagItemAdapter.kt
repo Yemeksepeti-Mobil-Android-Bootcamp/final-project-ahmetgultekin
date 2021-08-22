@@ -30,8 +30,9 @@ class BagItemAdapter() : RecyclerView.Adapter<BagItemAdapter.BagItemViewHolder>(
         fun bind(bagItem: BagItem,listener: IBagItemRemoveListener) {
             binding.bagItemName.text = bagItem.foodItem.name
             binding.bagItemRestaurant.text = bagItem.restaurantName
+            binding.bagItemQuantity.text = bagItem.quantity.toString()
             Glide.with(binding.root).load(bagItem.foodItem.imageUrl).into(binding.bagItemImage)
-            binding.bagItemPrice.text = "${bagItem.foodItem.price} TL"
+            binding.bagItemPrice.text = "${bagItem.foodItem.price * bagItem.quantity} TL"
             binding.bagItemRemove.setOnClickListener {
                 listener.onClick(bagItem)
             }

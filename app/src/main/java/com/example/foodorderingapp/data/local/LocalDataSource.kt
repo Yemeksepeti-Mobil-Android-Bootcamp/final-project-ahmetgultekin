@@ -18,20 +18,6 @@ class LocalDataSource @Inject constructor(
         sharedPreferencesManager.saveFirstLaunch(situation)
     }
 
-    fun basketSituation(situation: Boolean){
-        sharedPreferencesManager.basketSet(situation)
-    }
-    fun isBasketEmpty() : Boolean{
-        return sharedPreferencesManager.isBasketEmpty()
-    }
-
-    fun setToken(token : String){
-        sharedPreferencesManager.setToken(token)
-    }
-    fun getToken():String?{
-        return sharedPreferencesManager.getToken()
-    }
-
     fun addToBag(bagItem: BagItem){
         paperManager.addToBag(bagItem)
     }
@@ -43,6 +29,9 @@ class LocalDataSource @Inject constructor(
     }
     fun deleteBag(){
         paperManager.deleteBag()
+    }
+    fun deleteUser(){
+        paperManager.deleteUser()
     }
 
     fun saveUserInfo(user: LoginResponse){

@@ -13,10 +13,11 @@ class AccountViewModel @Inject constructor(private val apiRepository: ApiReposit
     fun getUserInfo() : LoginResponse?{
         return apiRepository.getUserInfo()
     }
-    fun setToken(token : String){
-        apiRepository.setToken(token)
-    }
     fun deleteBag(){
         apiRepository.deleteBag()
     }
+    fun deleteUser(){
+        apiRepository.deleteUser()
+    }
+
 }

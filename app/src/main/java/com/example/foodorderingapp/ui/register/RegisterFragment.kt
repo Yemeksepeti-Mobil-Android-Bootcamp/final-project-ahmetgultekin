@@ -32,6 +32,7 @@ class RegisterFragment : Fragment() {
         initViews()
     }
     fun initViews(){
+        // register request
         binding.buttonRegister.setOnClickListener {
             val registerRequest = RegisterRequest(binding.textInputEditTextEmail.editableText.toString(),
                 binding.textInputEditTextPassword.editableText.toString(),
@@ -48,8 +49,8 @@ class RegisterFragment : Fragment() {
                     }
                     Resource.Status.SUCCESS ->{
                         findNavController().navigate(R.id.action_registerFragment_to_bottomNavigationFragment)
-                        viewModel.setToken(it.data!!.token)
-                        viewModel.saveUserInfo(it.data)
+                        viewModel.saveUserInfo(it.data!!)
+                        Log.v("Tag",it.toString())
                     }
                 }
             })

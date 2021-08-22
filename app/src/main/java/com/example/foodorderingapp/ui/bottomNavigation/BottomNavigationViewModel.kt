@@ -13,14 +13,7 @@ import javax.inject.Inject
 class BottomNavigationViewModel @Inject constructor(val apiRepository: ApiRepository) : ViewModel() {
     private val bagItems = MutableLiveData<List<BagItem>>()
 
-    private val situation = MutableLiveData<Boolean>()
-    fun basketSituation(situation: Boolean){
-        apiRepository.basketSituation(situation)
-    }
-    fun isBasketEmpty() : LiveData<Boolean>{
-        situation.value = apiRepository.isBasketEmpty()
-        return situation
-    }
+
     fun getBagItems():LiveData<List<BagItem>>{
         bagItems.value = apiRepository.getBagItems()
         return bagItems

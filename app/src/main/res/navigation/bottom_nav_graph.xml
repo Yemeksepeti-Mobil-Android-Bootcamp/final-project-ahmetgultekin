@@ -50,10 +50,18 @@
         <action
             android:id="@+id/action_accountFragment_to_ordersFragment2"
             app:destination="@id/ordersFragment2" />
+        <action
+            android:id="@+id/action_accountFragment_to_saveAddressFragment"
+            app:destination="@id/saveAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment2"
         android:name="com.example.foodorderingapp.ui.bottomNavigation.account.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/saveAddressFragment"
+        android:name="com.example.foodorderingapp.ui.bottomNavigation.account.saveAddress.SaveAddressFragment"
+        android:label="fragment_save_address"
+        tools:layout="@layout/fragment_save_address" />
 </navigation>

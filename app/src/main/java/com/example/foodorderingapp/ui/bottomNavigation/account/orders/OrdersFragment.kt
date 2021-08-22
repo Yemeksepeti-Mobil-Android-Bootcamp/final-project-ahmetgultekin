@@ -45,19 +45,20 @@ class OrdersFragment : Fragment() {
         binding.ordersRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         binding.ordersRecycler.setHasFixedSize(true)
 
+        //fetching orders and displayin by recyclerview
         viewModel.getOrders(viewModel.getUserInfo()!!.id).observe(viewLifecycleOwner,{
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    Log.v("Tag", "Loading")
-
+                    binding.orderProgressBar.visibility = View.VISIBLE
                 }
                 Resource.Status.ERROR -> {
-                    Log.v("Tag", it.message!!)
+
+                    binding.orderProgressBar.visibility = View.GONE
                 }
                 Resource.Status.SUCCESS -> {
-                    Log.v("Tag", "Succes")
                     adapter.setOrder(it.data!!)
                     binding.ordersRecycler.adapter = adapter
+                    binding.orderProgressBar.visibility = View.GONE
 
                 }
             }

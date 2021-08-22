@@ -15,9 +15,6 @@ class LoginViewModel @Inject constructor(private val apiRepository: ApiRepositor
     fun login(loginRequest: LoginRequest) : LiveData<Resource<LoginResponse>>{
         return apiRepository.login(loginRequest)
     }
-    fun setToken(token : String){
-        apiRepository.setToken(token)
-    }
     fun saveUserInfo(user : LoginResponse){
         apiRepository.saveUserInfo(user)
     }

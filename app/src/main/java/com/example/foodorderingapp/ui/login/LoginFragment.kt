@@ -36,6 +36,7 @@ class LoginFragment: Fragment() {
         binding.toRegisterButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+        // login request
         binding.loginButton.setOnClickListener {
             val loginRequest = LoginRequest(binding.emailEditText.editableText.toString(),binding.passwordEditText.editableText.toString())
             viewModel.login(loginRequest).observe(viewLifecycleOwner,{
@@ -48,8 +49,7 @@ class LoginFragment: Fragment() {
                     }
                     Resource.Status.SUCCESS ->{
                         findNavController().navigate(R.id.action_loginFragment_to_bottomNavigationFragment)
-                        viewModel.setToken(it.data!!.token)
-                        viewModel.saveUserInfo(it.data)
+                        viewModel.saveUserInfo(it.data!!)
                     }
                 }
             })

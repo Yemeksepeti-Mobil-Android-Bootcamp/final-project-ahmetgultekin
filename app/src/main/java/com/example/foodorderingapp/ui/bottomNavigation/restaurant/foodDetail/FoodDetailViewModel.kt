@@ -13,6 +13,11 @@ import javax.inject.Inject
 class FoodDetailViewModel @Inject constructor(private val apiRepository: ApiRepository): ViewModel() {
 
     private val food = MutableLiveData<FoodItem>()
+    private val quantity = MutableLiveData<Int>()
+
+    init {
+        quantity.value = 1
+    }
 
     fun setFood(foodItem: FoodItem){
         food.value = foodItem
@@ -21,14 +26,19 @@ class FoodDetailViewModel @Inject constructor(private val apiRepository: ApiRepo
         return food
     }
     private val situation = MutableLiveData<Boolean>()
-    fun basketSituation(situation:Boolean){
-        apiRepository.basketSituation(situation)
-    }
-    fun isBasketEmpty() : LiveData<Boolean> {
-        situation.value = apiRepository.isBasketEmpty()
-        return situation
-    }
+
     fun addToBag(bagItem: BagItem){
         apiRepository.addToBag(bagItem)
+    }
+
+    fun increase(){
+        quantity.value = quantity.value!!.plus(1)
+    }
+    fun decrease(){
+        if(quantity.value!! > 1)
+        quantity.value = quantity.value!!.minus(1)
+    }
+    fun getQuantity():LiveData<Int>{
+        return quantity
     }
 }

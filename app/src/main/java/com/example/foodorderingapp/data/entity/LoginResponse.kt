@@ -10,4 +10,5 @@ data class LoginResponse(
     @SerializedName("name") val name: String,
     @SerializedName("lastname") val lastname: String,
     @SerializedName("phone") val phone: Long,
+    @SerializedName("address") var address : ArrayList<String>
 )
