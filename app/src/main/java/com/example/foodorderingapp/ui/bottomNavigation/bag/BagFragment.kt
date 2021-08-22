@@ -20,6 +20,9 @@ import com.example.foodorderingapp.databinding.FragmentBagBinding
 import com.example.foodorderingapp.utils.IBagItemRemoveListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class BagFragment : Fragment(),IBagItemRemoveListener {
@@ -76,7 +79,9 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
 
              viewModel.getBagItems().observe(viewLifecycleOwner,{ bagItems->
                  val userInfo = viewModel.getUserInfo()
-                 val order = Order(Accid(userInfo!!.id), email = userInfo.email,bagItems[0].foodItem,"2021-08-21T14:54:59.751Z",paymentMethod,bagItems[0].foodItem.price,1,bagItems[0].restaurantName)
+                 val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                 val currentDate = sdf.format(Date())
+                 val order = Order(Accid(userInfo!!.id), email = userInfo.email,bagItems[0].foodItem,currentDate,paymentMethod,bagItems[0].foodItem.price,1,bagItems[0].restaurantName)
                  viewModel.order(order)
                  Toast.makeText(requireContext(),"You ordered succesfully",Toast.LENGTH_SHORT).show()
                  viewModel.deleteBag()

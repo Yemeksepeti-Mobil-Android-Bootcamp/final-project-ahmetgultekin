@@ -57,9 +57,10 @@
             android:id="@+id/ordersDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/ordersPaymentMethod"
+            app:layout_constraintBottom_toBottomOf="@+id/ordersPrice"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ordersPaymentMethod"
+            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintStart_toEndOf="@+id/ordersPrice"
             tools:text="Date: 08/06/2021" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
