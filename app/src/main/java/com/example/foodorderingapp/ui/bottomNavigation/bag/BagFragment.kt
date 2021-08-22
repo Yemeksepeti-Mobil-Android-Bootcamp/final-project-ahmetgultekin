@@ -81,7 +81,7 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
                  val userInfo = viewModel.getUserInfo()
                  val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
                  val currentDate = sdf.format(Date())
-                 val order = Order(Accid(userInfo!!.id), email = userInfo.email,bagItems[0].foodItem,currentDate,paymentMethod,bagItems[0].foodItem.price,1,bagItems[0].restaurantName)
+                 val order = Order(Accid(userInfo!!.id), email = userInfo.email,bagItems[0].foodItem,"2021-08-21T14:54:59.751+00:00",paymentMethod,bagItems[0].foodItem.price,1,bagItems[0].restaurantName)
                  viewModel.order(order)
                  Toast.makeText(requireContext(),"You ordered succesfully",Toast.LENGTH_SHORT).show()
                  viewModel.deleteBag()
@@ -90,7 +90,7 @@ class BagFragment : Fragment(),IBagItemRemoveListener {
                  badge.isVisible = false
                  Handler(getMainLooper()).postDelayed({
                      findNavController().navigateUp()
-                 }, 500)
+                 }, 1000)
 
              })
 
